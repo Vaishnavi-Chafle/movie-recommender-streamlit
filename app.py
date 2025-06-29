@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import streamlit as st
 import pickle
 import pandas as pd
@@ -62,7 +62,7 @@ if st.button('Show Recommendations'):
 
 
 
-=======
+
 import streamlit as st
 import pickle
 import pandas as pd
@@ -75,7 +75,7 @@ similarity = pickle.load(open('similarity.pkl', 'rb'))
 st.title('🎬 Movie Recommender System with Posters')
 
 
-# Function to fetch poster using OMDb API
+
 def fetch_poster_omdb(movie_title):
     api_key = "76a82709"  # Your OMDb API key
     url = f"http://www.omdbapi.com/?t={movie_title}&apikey={api_key}"
