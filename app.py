@@ -75,8 +75,12 @@ if st.button("🎯 Show Recommendations", key="recommend_btn"):
     cols = st.columns(5)
     for i in range(5):
         with cols[i]:
-            st.text(names[i])
             st.image(posters[i])
+            st.markdown(
+                f"<p style='color:#ffffff; font-weight:bold; text-align:center'>{names[i]}</p>",
+                unsafe_allow_html=True
+            )
+
 
 
 
