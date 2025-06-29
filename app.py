@@ -44,8 +44,10 @@ def recommend(movie):
 # Streamlit UI
 selected_movie_name = st.selectbox(
     "Type or select a movie:",
-    movies['title'].values
+    movies['title'].values,
+    key="movie_select"
 )
+
 
 if st.button('Show Recommendations'):
     names, posters = recommend(selected_movie_name)
