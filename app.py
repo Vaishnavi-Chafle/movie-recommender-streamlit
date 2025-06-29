@@ -15,32 +15,27 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Custom dark theme styling
-st.markdown(
-    """
+# Apply custom dark theme using HTML/CSS
+st.markdown("""
     <style>
-    body {
-        background-color: #121212;
-        color: #f5f5f5;
-    }
     .stApp {
         background-color: #121212;
-        color: #f5f5f5;
+        color: #FFFFFF;
     }
-    .stTextInput, .stSelectbox, .stButton {
-        background-color: #1f1f1f !important;
-        color: white !important;
+    h1, h2, h3, h4, h5, h6 {
+        color: #00FFAA;
     }
+    .css-1d391kg { color: white; }
+    .css-ffhzg2 { color: white; }
     </style>
-    """,
-    unsafe_allow_html=True
-)
+    """, unsafe_allow_html=True)
 
+# App title
 st.title('🎬 Movie Recommender System with Posters')
 
-# Fetch movie poster using OMDb API
+# Function to fetch poster using OMDb API
 def fetch_poster_omdb(movie_title):
-    api_key = "76a82709"  # OMDb API Key
+    api_key = "76a82709"  # Replace with your actual OMDb API key
     url = f"http://www.omdbapi.com/?t={movie_title}&apikey={api_key}"
     response = requests.get(url)
     data = response.json()
@@ -48,13 +43,14 @@ def fetch_poster_omdb(movie_title):
     if data["Response"] == "True" and data["Poster"] != "N/A":
         return data["Poster"]
     else:
-        return "https://via.placeholder.com/300x450.png?text=No+Poster"
+        return "https://via.placeholder.com/300x450.png?text=Poster+Not+Available"
 
-# Recommend movies
+# Function to recommend movies
 def recommend(movie):
     movie_index = movies[movies['title'] == movie].index[0]
     distances = similarity[movie_index]
-    movie_list = sorted(list(enumerate(distances)), reverse=True, key=lambda x: x[1])[1:6]
+    movie_list = sorted(
+        list(enumerate(distances)), reverse=True, key=lambda x: x[1])[1:6]
 
     recommended_movies = []
     recommended_posters = []
@@ -66,20 +62,22 @@ def recommend(movie):
 
     return recommended_movies, recommended_posters
 
-# UI Elements
+# Search/Select movie
 selected_movie_name = st.selectbox(
     "🎥 Type or select a movie:",
     movies['title'].values,
-    key="movie_select"
+    key="movie_selector"
 )
 
-if st.button("🎯 Show Recommendations", key="recommend_button"):
+# Recommendation button
+if st.button("🎯 Show Recommendations", key="recommend_btn"):
     names, posters = recommend(selected_movie_name)
     cols = st.columns(5)
     for i in range(5):
         with cols[i]:
             st.text(names[i])
             st.image(posters[i])
+
 
 
 
