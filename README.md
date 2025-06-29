@@ -37,4 +37,4 @@ pip install -r requirements.txt
 streamlit run app.py
 
 ## 📸 Screenshot
-![App Screenshot](screenshoti.png)
+![App Screenshot]([screenshot1.png](https://github.com/Vaishnavi-Chafle/movie-recommender-streamlit/blob/main/Screenshot1.png))
